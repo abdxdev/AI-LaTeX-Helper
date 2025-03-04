@@ -28,10 +28,10 @@ export function activate(context: vscode.ExtensionContext) {
 
     function updateStatusBarText() {
         if (isEnabled) {
-            latexStatusBarItem.text = "$(check) LaTeX AI";
+            latexStatusBarItem.text = "$(check) AI LaTeX Helper";
             latexStatusBarItem.tooltip = "AI LaTeX suggestions enabled (click to disable)";
         } else {
-            latexStatusBarItem.text = "$(x) LaTeX AI";
+            latexStatusBarItem.text = "$(x) AI LaTeX Helper";
             latexStatusBarItem.tooltip = "AI LaTeX suggestions disabled (click to enable)";
         }
 
@@ -193,7 +193,7 @@ export function activate(context: vscode.ExtensionContext) {
         isEnabled = !isEnabled;
         vscode.workspace.getConfiguration('aiLatex').update('enabled', isEnabled, true);
         updateStatusBarText();
-        vscode.window.showInformationMessage(`LaTeX AI suggestions ${isEnabled ? 'enabled' : 'disabled'}`);
+        vscode.window.showInformationMessage(`AI LaTeX Helper suggestions ${isEnabled ? 'enabled' : 'disabled'}`);
     });
 
     const convertCommand = vscode.commands.registerCommand('extension.convertToLaTeX', async () => {

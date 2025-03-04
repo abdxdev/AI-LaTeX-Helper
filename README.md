@@ -27,16 +27,16 @@ To use the AI LaTeX Helper, follow these steps:
 
 ## Extension Settings
 
-- `aiLatex.apiKey`: API key for Google Generative AI.
-- `aiLatex.debounceDelay`: Delay in milliseconds before triggering LaTeX suggestions.
-- `aiLatex.enabled`: Enable or disable LaTeX AI suggestions.
+- `ai-latex-helper.apiKey`: API key for Google Generative AI.
+- `ai-latex-helper.debounceDelay`: Delay in milliseconds before triggering LaTeX suggestions.
+- `ai-latex-helper.enabled`: Enable or disable LaTeX AI suggestions.
 
 ## Commands
 
 To access the commands, press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (Mac) to open the command palette and type the following commands:
 
 - **Convert Selection to LaTeX:** `extension.convertToLaTeX`
-- **Toggle LaTeX AI Suggestions:** `extension.toggleLaTeXAI`
+- **Toggle LaTeX AI Suggestions:** `extension.toggleAILaTeXHelper`
 
 ## Key Bindings
 
@@ -45,5 +45,8 @@ To access the commands, press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (M
 
 ## Contributing
 
-If you encounter any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request on [GitHub](https://github.com/abdbbdii/AI-LaTeX-Helper)
+If you encounter any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request on [GitHub](https://github.com/abdbbdii/AI-LaTeX-Helper).
 
+## Repository
+
+The source code for this extension is available on [GitHub](https://github.com/abdbbdii/AI-LaTeX-Helper).

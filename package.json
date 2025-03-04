@@ -75,5 +75,9 @@
     "@types/vscode": "^1.97.0",
     "@vscode/vsce": "^3.2.2",
     "typescript": "^5.8.2"
+  },
+  "repository":{
+    "type": "git",
+    "url": "https://github.com/abdbbdii/AI-LaTeX-Helper.git"
   }
 }

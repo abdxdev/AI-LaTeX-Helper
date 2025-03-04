@@ -1,0 +1,79 @@
+{
+  "name": "ai-latex-helper",
+  "displayName": "AI LaTeX Helper",
+  "description": "VS Code extension for automatic LaTeX generation from natural language",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.97.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:markdown"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.convertToLaTeX",
+        "title": "Convert Selection to LaTeX"
+      },
+      {
+        "command": "extension.toggleLaTeXAI",
+        "title": "Toggle LaTeX AI Suggestions"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.convertToLaTeX",
+        "key": "ctrl+alt+l",
+        "mac": "cmd+alt+l",
+        "when": "editorTextFocus && editorLangId == 'markdown'"
+      },
+      {
+        "command": "extension.toggleLaTeXAI",
+        "key": "ctrl+alt+t",
+        "mac": "cmd+alt+t",
+        "when": "editorTextFocus && editorLangId == 'markdown'"
+      }
+    ],
+    "configuration": {
+      "title": "AI LaTeX Extension",
+      "properties": {
+        "aiLatex.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API key for Google Generative AI"
+        },
+        "aiLatex.debounceDelay": {
+          "type": "number",
+          "default": 1000,
+          "description": "Delay in milliseconds before triggering LaTeX suggestions"
+        },
+        "aiLatex.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable LaTeX AI suggestions"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "@types/vscode": "^1.97.0",
+    "@vscode/vsce": "^3.2.2",
+    "typescript": "^5.8.2"
+  }
+}

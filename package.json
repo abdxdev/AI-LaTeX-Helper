@@ -4,7 +4,7 @@
   "description": "VS Code extension for automatic LaTeX generation from natural language",
   "publisher": "abd-dev",
   "icon": "media/icon.png",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "engines": {
     "vscode": "^1.60.0"
   },

@@ -3,6 +3,7 @@
   "displayName": "AI LaTeX Helper",
   "description": "VS Code extension for automatic LaTeX generation from natural language",
   "publisher": "abd-dev",
+  "icon": "media/icon.png",
   "version": "0.1.0",
   "engines": {
     "vscode": "^1.97.0"

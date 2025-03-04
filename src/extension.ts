@@ -4,7 +4,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 export function activate(context: vscode.ExtensionContext) {
     console.log('AI LaTeX Extension is now active');
 
-    const config = vscode.workspace.getConfiguration('aiLatex');
+    const config = vscode.workspace.getConfiguration('ai-latex-helper');
     let apiKey = config.get<string>('apiKey') || '';
     let debounceDelay = config.get<number>('debounceDelay') || 1000;
     let isEnabled = config.get<boolean>('enabled') ?? true;
@@ -35,12 +35,12 @@ export function activate(context: vscode.ExtensionContext) {
             latexStatusBarItem.tooltip = "AI LaTeX suggestions disabled (click to enable)";
         }
 
-        latexStatusBarItem.command = 'extension.toggleLaTeXAI';
+        latexStatusBarItem.command = 'extension.toggleAILaTeXHelper';
     }
 
     const generateLaTeX = async (text: string): Promise<string | null> => {
         if (!apiKey || apiKey.trim() === '') {
-            vscode.window.showErrorMessage('Please set your API key in settings (aiLatex.apiKey)');
+            vscode.window.showErrorMessage('Please set your API key in settings (ai-latex-helper.apiKey)');
             return null;
         }
 
@@ -138,7 +138,7 @@ export function activate(context: vscode.ExtensionContext) {
 
                 const completionItem = new vscode.CompletionItem('LaTeX: ' + latex, vscode.CompletionItemKind.Snippet);
                 completionItem.insertText = latex + '$';
-                completionItem.documentation = new vscode.MarkdownString(`**LaTeX formula for:** "${currentFormula.text}"`);
+                completionItem.documentation = new vscode.MarkdownString(`**LaTeX formula for:** "${currentFormula.text}"\\\n$${latex}$`);
                 completionItem.detail = 'AI-generated LaTeX';
                 completionItem.sortText = '0';
                 completionItem.range = currentFormula.range;
@@ -189,9 +189,9 @@ export function activate(context: vscode.ExtensionContext) {
         }, debounceDelay);
     };
 
-    const toggleCommand = vscode.commands.registerCommand('extension.toggleLaTeXAI', () => {
+    const toggleCommand = vscode.commands.registerCommand('extension.toggleAILaTeXHelper', () => {
         isEnabled = !isEnabled;
-        vscode.workspace.getConfiguration('aiLatex').update('enabled', isEnabled, true);
+        vscode.workspace.getConfiguration('ai-latex-helper').update('enabled', isEnabled, true);
         updateStatusBarText();
         vscode.window.showInformationMessage(`AI LaTeX Helper suggestions ${isEnabled ? 'enabled' : 'disabled'}`);
     });
@@ -223,8 +223,8 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     const configListener = vscode.workspace.onDidChangeConfiguration(event => {
-        if (event.affectsConfiguration('aiLatex')) {
-            const newConfig = vscode.workspace.getConfiguration('aiLatex');
+        if (event.affectsConfiguration('ai-latex-helper')) {
+            const newConfig = vscode.workspace.getConfiguration('ai-latex-helper');
 
             const newApiKey = newConfig.get<string>('apiKey') || '';
             if (newApiKey !== apiKey) {

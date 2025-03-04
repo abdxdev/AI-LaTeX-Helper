@@ -43,12 +43,7 @@ To access the commands, press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (M
 - **Convert Selection to LaTeX:** `Ctrl+Alt+L` (Windows/Linux), `Cmd+Alt+L` (Mac)
 - **Toggle LaTeX AI Suggestions:** `Ctrl+Alt+T` (Windows/Linux), `Cmd+Alt+T` (Mac)
 
-## Release Notes
-
-### v0.1.0
-
-Initial release.
-
 ## Contributing
 
 If you encounter any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request on [GitHub](https://github.com/abdbbdii/AI-LaTeX-Helper)
+

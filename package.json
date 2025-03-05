@@ -4,7 +4,7 @@
   "description": "VS Code extension for automatic LaTeX generation from natural language",
   "publisher": "abd-dev",
   "icon": "media/icon.png",
-  "version": "0.1.2",
+  "version": "0.0.1",
   "engines": {
     "vscode": "^1.60.0"
   },
@@ -14,27 +14,40 @@
   "activationEvents": [
     "onLanguage:markdown"
   ],
+  "languages": [
+    {
+      "id": "markdown",
+      "extensions": [
+        ".md",
+        ".markdown"
+      ],
+      "aliases": [
+        "Markdown",
+        "markdown"
+      ]
+    }
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "extension.convertToLaTeX",
+        "command": "ai-latex-helper.convert-to-latex",
         "title": "Convert Selection to LaTeX"
       },
       {
-        "command": "extension.toggleAILaTeXHelper",
+        "command": "ai-latex-helper.toggle",
         "title": "Toggle LaTeX AI Suggestions"
       }
     ],
     "keybindings": [
       {
-        "command": "extension.convertToLaTeX",
+        "command": "ai-latex-helper.convert-to-latex",
         "key": "ctrl+alt+l",
         "mac": "cmd+alt+l",
         "when": "editorTextFocus && editorLangId == 'markdown'"
       },
       {
-        "command": "extension.toggleAILaTeXHelper",
+        "command": "ai-latex-helper.toggle",
         "key": "ctrl+alt+t",
         "mac": "cmd+alt+t",
         "when": "editorTextFocus && editorLangId == 'markdown'"
@@ -78,7 +91,7 @@
     "@vscode/vsce": "^3.2.2",
     "typescript": "^5.8.2"
   },
-  "repository":{
+  "repository": {
     "type": "git",
     "url": "https://github.com/abdbbdii/AI-LaTeX-Helper.git"
   }

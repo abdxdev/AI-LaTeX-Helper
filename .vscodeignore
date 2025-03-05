@@ -1,6 +1,6 @@
-.vscode/**
+# .vscode/**
 .vscode-test/**
-node_modules/**
+# node_modules/**
 src/**
 media/other/**
 .gitignore

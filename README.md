@@ -35,8 +35,8 @@ To use the AI LaTeX Helper, follow these steps:
 
 To access the commands, press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (Mac) to open the command palette and type the following commands:
 
-- **Convert Selection to LaTeX:** `extension.convertToLaTeX`
-- **Toggle LaTeX AI Suggestions:** `extension.toggleAILaTeXHelper`
+- **Convert Selection to LaTeX:** `ai-latex-helper.convertToLaTeX`
+- **Toggle LaTeX AI Suggestions:** `ai-latex-helper.toggleAILaTeXHelper`
 
 ## Key Bindings
 

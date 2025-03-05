@@ -35,7 +35,7 @@ export function activate(context: vscode.ExtensionContext) {
             latexStatusBarItem.tooltip = "AI LaTeX suggestions disabled (click to enable)";
         }
 
-        latexStatusBarItem.command = 'extension.toggleAILaTeXHelper';
+        latexStatusBarItem.command = 'ai-latex-helper.toggle';
     }
 
     const generateLaTeX = async (text: string): Promise<string | null> => {
@@ -189,14 +189,14 @@ export function activate(context: vscode.ExtensionContext) {
         }, debounceDelay);
     };
 
-    const toggleCommand = vscode.commands.registerCommand('extension.toggleAILaTeXHelper', () => {
+    const toggleCommand = vscode.commands.registerCommand('ai-latex-helper.toggle', () => {
         isEnabled = !isEnabled;
         vscode.workspace.getConfiguration('ai-latex-helper').update('enabled', isEnabled, true);
         updateStatusBarText();
         vscode.window.showInformationMessage(`AI LaTeX Helper suggestions ${isEnabled ? 'enabled' : 'disabled'}`);
     });
 
-    const convertCommand = vscode.commands.registerCommand('extension.convertToLaTeX', async () => {
+    const convertCommand = vscode.commands.registerCommand('ai-latex-helper.convert-to-latex', async () => {
         const editor = vscode.window.activeTextEditor;
         if (!editor || !editor.document.fileName.endsWith('.md')) {
             vscode.window.showInformationMessage('Please open a Markdown file to use LaTeX generation.');

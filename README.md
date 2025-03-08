@@ -1,6 +1,6 @@
 # AI LaTeX Helper
 
-![AI LaTeX Helper Animated GIF](https://github.com/abdbbdii/AI-LaTeX-Helper/blob/main/media/other/ai-latex-helper.gif?raw=true)
+![AI LaTeX Helper Animated GIF](https://github.com/abdbbdii/AI-LaTeX-Helper/blob/main/media/other/demo.gif?raw=true)
 
 The AI LaTeX Helper is a VS Code extension that turns plain English descriptions of math into LaTeX equations using Google Generative AI. Perfect for students, researchers, and writers, it simplifies creating LaTeX without needing to remember the syntax.
 

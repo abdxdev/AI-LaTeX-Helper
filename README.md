@@ -1,12 +1,12 @@
 <div align="center">
 
-<img src="https://github.com/abdbbdii/AI-LaTeX-Helper/blob/main/media/icon.png?raw=true" height="150" />
+<img src="https://github.com/abdxdev/AI-LaTeX-Helper/blob/main/media/icon.png?raw=true" height="150" />
 
 <h1 align="center">AI LaTeX Helper</h1>
 
-[![License](https://img.shields.io/github/license/abdbbdii/AI-LaTeX-Helper?style=flat-square&logo=GNU&label=License)](https://github.com/abdbbdii/AI-LaTeX-Helper/tree/main)
-[![GitHub Issues](https://img.shields.io/github/issues/abdbbdii/AI-LaTeX-Helper.svg?style=flat-square&label=Issues&color=FF70A7)](https://github.com/abdbbdii/AI-LaTeX-Helper/issues)
-[![Last Commit](https://img.shields.io/github/last-commit/abdbbdii/AI-LaTeX-Helper.svg?style=flat-square&label=Last%20Commit&color=A06EE1)](https://github.com/abdbbdii/AI-LaTeX-Helper/tree/main)
+[![License](https://img.shields.io/github/license/abdxdev/AI-LaTeX-Helper?style=flat-square&logo=GNU&label=License)](https://github.com/abdxdev/AI-LaTeX-Helper/tree/main)
+[![GitHub Issues](https://img.shields.io/github/issues/abdxdev/AI-LaTeX-Helper.svg?style=flat-square&label=Issues&color=FF70A7)](https://github.com/abdxdev/AI-LaTeX-Helper/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/abdxdev/AI-LaTeX-Helper.svg?style=flat-square&label=Last%20Commit&color=A06EE1)](https://github.com/abdxdev/AI-LaTeX-Helper/tree/main)
 <!-- <br />
 [![GitHub Issues](https://img.shields.io/visual-studio-marketplace/stars/abd-dev.AI-LaTeX-Helper?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=abd-dev.AI-LaTeX-Helper)
 [![GitHub](https://img.shields.io/visual-studio-marketplace/v/abd-dev.AI-LaTeX-Helper?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=abd-dev.AI-LaTeX-Helper&ssr=false#version-history)
@@ -16,7 +16,7 @@
 
 The AI LaTeX Helper is a VS Code extension that turns plain English descriptions of math into LaTeX equations using Google Generative AI. Perfect for students, researchers, and writers, it simplifies creating LaTeX without needing to remember the syntax.
 
-![AI LaTeX Helper Animated GIF](https://github.com/abdbbdii/AI-LaTeX-Helper/blob/main/media/other/demo.gif?raw=true)
+![AI LaTeX Helper Animated GIF](https://github.com/abdxdev/AI-LaTeX-Helper/blob/main/media/other/demo.gif?raw=true)
 
 ## Note
 
@@ -59,8 +59,8 @@ To access the commands, press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (M
 
 ## Contributing
 
-If you encounter any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request on [GitHub](https://github.com/abdbbdii/AI-LaTeX-Helper).
+If you encounter any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request on [GitHub](https://github.com/abdxdev/AI-LaTeX-Helper).
 
 ## Repository
 
-The source code for this extension is available on [GitHub](https://github.com/abdbbdii/AI-LaTeX-Helper).
+The source code for this extension is available on [GitHub](https://github.com/abdxdev/AI-LaTeX-Helper).

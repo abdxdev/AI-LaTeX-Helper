@@ -6,7 +6,7 @@
   "icon": "media/icon.png",
   "galleryBanner": {
   },
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.60.0"
   },
@@ -18,7 +18,9 @@
     "url": "https://github.com/abdbbdii/AI-LaTeX-Helper"
   },
   "activationEvents": [
-    "onLanguage:markdown"
+    "onLanguage:markdown",
+    "onLanguage:python",
+    "onNotebook:jupyter-notebook"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -37,13 +39,13 @@
         "command": "ai-latex-helper.convert-to-latex",
         "key": "ctrl+alt+l",
         "mac": "cmd+alt+l",
-        "when": "editorTextFocus && editorLangId == 'markdown'"
+        "when": "editorTextFocus && (editorLangId == 'markdown')"
       },
       {
         "command": "ai-latex-helper.toggle",
         "key": "ctrl+alt+t",
         "mac": "cmd+alt+t",
-        "when": "editorTextFocus && editorLangId == 'markdown'"
+        "when": "editorTextFocus && (editorLangId == 'markdown')"
       }
     ],
     "configuration": {

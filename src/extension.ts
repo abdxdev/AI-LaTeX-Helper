@@ -14,6 +14,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     let timeout: NodeJS.Timeout | undefined;
     let latexStatusBarItem: vscode.StatusBarItem;
+    let lastSuggestionTime: number = 0;
 
     latexStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
     updateStatusBarText();
@@ -36,6 +37,19 @@ export function activate(context: vscode.ExtensionContext) {
         }
 
         latexStatusBarItem.command = 'ai-latex-helper.toggle';
+    }
+
+    function isEligibleDocument(document: vscode.TextDocument): boolean {
+        // Regular markdown files
+        if (document.languageId === 'markdown' && document.uri.scheme === 'file') {
+            return true;
+        }
+        
+        if (document.languageId === 'markdown' && document.uri.scheme === 'vscode-notebook-cell') {
+            return true;
+        }
+        
+        return false;
     }
 
     const generateLaTeX = async (text: string): Promise<string | null> => {
@@ -115,10 +129,19 @@ export function activate(context: vscode.ExtensionContext) {
     };
 
     const completionProvider = vscode.languages.registerCompletionItemProvider(
-        { language: 'markdown', scheme: 'file' },
+        [
+            { language: 'markdown', scheme: 'file' },
+            { language: 'markdown', scheme: 'vscode-notebook-cell' }
+            // Removed Python cell support
+        ],
         {
-            async provideCompletionItems(document, position, token, context) {
-                if (!isEnabled) {
+            async provideCompletionItems(document, position) {
+                if (!isEnabled || !isEligibleDocument(document)) {
+                    return null;
+                }
+
+                const now = Date.now();
+                if (now - lastSuggestionTime < 500) {
                     return null;
                 }
 
@@ -139,11 +162,12 @@ export function activate(context: vscode.ExtensionContext) {
                 const completionItem = new vscode.CompletionItem('LaTeX: ' + latex, vscode.CompletionItemKind.Snippet);
                 completionItem.insertText = latex + '$';
                 completionItem.documentation = new vscode.MarkdownString(`**LaTeX formula for:** "${currentFormula.text}"\\\n$${latex}$`);
-                completionItem.detail = 'AI-generated LaTeX';
-                completionItem.sortText = '0';
                 completionItem.range = currentFormula.range;
-                completionItem.preselect = true;
-                completionItem.filterText = currentFormula.text;
+
+                completionItem.command = {
+                    command: 'ai-latex-helper.suggestionAccepted',
+                    title: 'Suggestion Accepted'
+                };
 
                 return [completionItem];
             }
@@ -151,8 +175,13 @@ export function activate(context: vscode.ExtensionContext) {
         '$'
     );
 
+
     const onTextDocumentChange = async (event: vscode.TextDocumentChangeEvent) => {
-        if (!isEnabled || !event.document.fileName.endsWith('.md')) {
+        if (!isEnabled || !isEligibleDocument(event.document)) {
+            return;
+        }
+        
+        if (event.document.isDirty) {
             return;
         }
 
@@ -196,10 +225,20 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window.showInformationMessage(`AI LaTeX Helper suggestions ${isEnabled ? 'enabled' : 'disabled'}`);
     });
 
+    const suggestionAcceptedCommand = vscode.commands.registerCommand('ai-latex-helper.suggestionAccepted', () => {
+        lastSuggestionTime = Date.now();
+    });
+    context.subscriptions.push(suggestionAcceptedCommand);
+
     const convertCommand = vscode.commands.registerCommand('ai-latex-helper.convert-to-latex', async () => {
         const editor = vscode.window.activeTextEditor;
-        if (!editor || !editor.document.fileName.endsWith('.md')) {
-            vscode.window.showInformationMessage('Please open a Markdown file to use LaTeX generation.');
+        if (!editor) {
+            vscode.window.showInformationMessage('No active editor found.');
+            return;
+        }
+        
+        if (!isEligibleDocument(editor.document)) {
+            vscode.window.showInformationMessage('AI LaTeX Helper only works in Markdown files and Markdown cells in notebooks.');
             return;
         }
 

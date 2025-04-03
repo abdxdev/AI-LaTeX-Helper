@@ -24,11 +24,11 @@ To use the AI LaTeX Helper, follow these steps:
 
 1. Obtain a Google Cloud API key from [Google AI Studio](https://aistudio.google.com/apikey).
 2. Set the API key in the extension settings to enable the AI LaTeX Helper.
-3. Ensure you are inside `$...$` in Markdown files to receive LaTeX equation suggestions.
+3. Ensure you are inside `$...$` in Markdown files or Markdown cells in Jupyter notebooks to receive LaTeX equation suggestions.
 
 ## Features
 
-- **Markdown Support:** Works with Markdown files, allowing you to write LaTeX equations in Markdown with ease.
+- **Markdown Support:** Works with Markdown files as markdown cells in ipython notebooks.
 - **Real-Time LaTeX Suggestions:** As you type, the extension provides instant LaTeX suggestions for mathematical expressions.
 - **Intelligent AI-Powered Conversion:** Uses Google's Generative AI to accurately convert natural language into LaTeX.
 - **Inline Suggestions:** Displays LaTeX suggestions in a small dropdown menu, allowing you to quickly insert equations just by pressing tab or enter.

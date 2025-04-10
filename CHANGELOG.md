@@ -2,11 +2,11 @@
 
 ## v0.0.3
 
-## Added
+### Added
 
 - Added support for LaTeX autocompletion in Jupyter Notebooks (.ipynb files)
 
-## Changed
+### Changed
 
 - Better detection of LaTeX formulas in Markdown cells
 - Improved activation logic to ensure the extension loads for notebook files

@@ -7,16 +7,12 @@
 [![License](https://img.shields.io/github/license/abdxdev/AI-LaTeX-Helper?style=flat-square&logo=GNU&label=License)](https://github.com/abdxdev/AI-LaTeX-Helper/tree/main)
 [![GitHub Issues](https://img.shields.io/github/issues/abdxdev/AI-LaTeX-Helper.svg?style=flat-square&label=Issues&color=FF70A7)](https://github.com/abdxdev/AI-LaTeX-Helper/issues)
 [![Last Commit](https://img.shields.io/github/last-commit/abdxdev/AI-LaTeX-Helper.svg?style=flat-square&label=Last%20Commit&color=A06EE1)](https://github.com/abdxdev/AI-LaTeX-Helper/tree/main)
-<!-- <br />
-[![GitHub Issues](https://img.shields.io/visual-studio-marketplace/stars/abd-dev.AI-LaTeX-Helper?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=abd-dev.AI-LaTeX-Helper)
-[![GitHub](https://img.shields.io/visual-studio-marketplace/v/abd-dev.AI-LaTeX-Helper?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=abd-dev.AI-LaTeX-Helper&ssr=false#version-history)
-[![GitHub](https://img.shields.io/visual-studio-marketplace/d/abd-dev.AI-LaTeX-Helper?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=abd-dev.AI-LaTeX-Helper&ssr=false#review-details) -->
 
 </div>
 
 The AI LaTeX Helper is a VS Code extension that turns plain English descriptions of math into LaTeX equations using Google Generative AI. Perfect for students, researchers, and writers, it simplifies creating LaTeX without needing to remember the syntax.
 
-![AI LaTeX Helper Animated GIF](https://github.com/abdxdev/AI-LaTeX-Helper/blob/main/media/other/demo.gif?raw=true)
+![Demo](https://github.com/abdxdev/AI-LaTeX-Helper/blob/main/media/other/demo.gif?raw=true)
 
 ## Note
 

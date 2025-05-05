@@ -1,5 +1,18 @@
 # Change Log
 
+## v0.0.4
+
+### Added
+
+- Added new command 'abd-dev: Set Gemini API Key' for secure API key entry
+- Added configuration for Gemini model selection
+
+### Changed
+
+- Improved math formula detection.
+- Updated API key configuration to use password input through command palette
+- Moved API key configuration under 'abd-dev' namespace
+
 ## v0.0.3
 
 ### Added

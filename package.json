@@ -6,7 +6,7 @@
   "icon": "media/icon.png",
   "galleryBanner": {
   },
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.60.0"
   },
@@ -17,6 +17,18 @@
     "type": "git",
     "url": "https://github.com/abdbbdii/AI-LaTeX-Helper"
   },
+  "keywords": [
+    "latex",
+    "ai",
+    "latex-helper",
+    "latex-ai-helper",
+    "math",
+    "latex-assistant",
+    "latex-generator",
+    "markdown"
+  ],
+  "author": "abd-dev",
+  "license": "MIT",
   "activationEvents": [
     "onLanguage:markdown",
     "onLanguage:python",
@@ -32,6 +44,10 @@
       {
         "command": "ai-latex-helper.toggle",
         "title": "Toggle LaTeX AI Suggestions"
+      },
+      {
+        "command": "abd-dev.setApiKey",
+        "title": "abd-dev: Set Gemini API Key"
       }
     ],
     "keybindings": [
@@ -51,10 +67,15 @@
     "configuration": {
       "title": "AI LaTeX Extension",
       "properties": {
-        "ai-latex-helper.apiKey": {
+        "abd-dev.geminiApiKey": {
           "type": "string",
           "default": "",
           "description": "API key for Google Generative AI"
+        },
+        "abd-dev.geminiModel": {
+          "type": "string",
+          "default": "gemini-2.0-flash-001",
+          "description": "Model to use for code generation"
         },
         "ai-latex-helper.debounceDelay": {
           "type": "number",

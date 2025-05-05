@@ -23,7 +23,7 @@ The AI LaTeX Helper is a VS Code extension that turns plain English descriptions
 To use the AI LaTeX Helper, follow these steps:
 
 1. Obtain a Google Cloud API key from [Google AI Studio](https://aistudio.google.com/apikey).
-2. Set the API key in the extension settings to enable the AI LaTeX Helper.
+2. Open the command palette (Ctrl+Shift+P) and run "abd-dev: Set Gemini API Key" to securely set your API key.
 3. Ensure you are inside `$...$` in Markdown files or Markdown cells in Jupyter notebooks to receive LaTeX equation suggestions.
 
 ## Features
@@ -41,14 +41,16 @@ To use the AI LaTeX Helper, follow these steps:
 
 ## Extension Settings
 
-- `ai-latex-helper.apiKey`: API key for Google Generative AI.
-- `ai-latex-helper.debounceDelay`: Delay in milliseconds before triggering LaTeX suggestions.
-- `ai-latex-helper.enabled`: Enable or disable LaTeX AI suggestions.
+- `abd-dev.geminiApiKey`: API key for Google Generative AI (set through command palette)
+- `abd-dev.geminiModel`: Model to use for code generation
+- `ai-latex-helper.debounceDelay`: Delay in milliseconds before triggering LaTeX suggestions
+- `ai-latex-helper.enabled`: Enable or disable LaTeX AI suggestions
 
 ## Commands
 
-To access the commands, press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (Mac) to open the command palette and type the following commands:
+To access the commands, press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (Mac) to open the command palette and type:
 
+- **Set Gemini API Key:** `abd-dev: Set Gemini API Key`
 - **Convert Selection to LaTeX:** `ai-latex-helper.convertToLaTeX`
 - **Toggle LaTeX AI Suggestions:** `ai-latex-helper.toggleAILaTeXHelper`
 

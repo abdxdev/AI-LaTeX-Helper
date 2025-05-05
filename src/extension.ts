@@ -4,13 +4,15 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 export function activate(context: vscode.ExtensionContext) {
     console.log('AI LaTeX Extension is now active');
 
-    const config = vscode.workspace.getConfiguration('ai-latex-helper');
-    let apiKey = config.get<string>('apiKey') || '';
-    let debounceDelay = config.get<number>('debounceDelay') || 1000;
-    let isEnabled = config.get<boolean>('enabled') ?? true;
+    const config = vscode.workspace.getConfiguration('abd-dev');
+    let apiKey = config.get<string>('geminiApiKey') || '';
+    let modelName = config.get<string>('geminiModel') || 'gemini-2.0-flash-001';
 
     let genAI = new GoogleGenerativeAI(apiKey);
-    let model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+    let model = genAI.getGenerativeModel({ model: modelName });
+
+    let debounceDelay = vscode.workspace.getConfiguration('ai-latex-helper').get<number>('debounceDelay') || 1000;
+    let isEnabled = vscode.workspace.getConfiguration('ai-latex-helper').get<boolean>('enabled') ?? true;
 
     let timeout: NodeJS.Timeout | undefined;
     let latexStatusBarItem: vscode.StatusBarItem;
@@ -54,25 +56,31 @@ export function activate(context: vscode.ExtensionContext) {
 
     const generateLaTeX = async (text: string): Promise<string | null> => {
         if (!apiKey || apiKey.trim() === '') {
-            vscode.window.showErrorMessage('Please set your API key in settings (ai-latex-helper.apiKey)');
+            vscode.window.showErrorMessage('Please set your Gemini API key using the command palette (abd-dev: Set Gemini API Key)');
             return null;
         }
 
         try {
             const systemInstructions = `Convert the given English text description into a LaTeX equation. 
             Follow these formatting rules:
-            1. If this doesn't describe a mathematical expression, return "NOT_MATH"
-            2. If it does describe a mathematical expression, format it as just the raw LaTeX without dollar signs or quotes
-            3. Don't include any explanations, just return the formatted LaTeX.
+            1. If this doesn't describe anything that could be expressed in LaTeX notation, return "NOT_MATH"
+            2. For mathematical expressions, return just the raw LaTeX without dollar signs or quotes
+            3. Don't include any explanations, just return the formatted LaTeX
+            4. Accept and process ANY mathematical expression, even if it's mathematically invalid
+            5. Don't try to correct mathematical errors, just format them properly in LaTeX
+            6. Always generate valid LaTeX syntax even for invalid math
+            7. Allow undefined variables and incomplete expressions
+            8. Format nonsensical math operations as long as they can be expressed in LaTeX
             
-            Example 1: "the quadratic formula"
-            Response: "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"
-            
-            Example 2: "integral of x squared"
-            Response: "\\int x^2 dx"
-            
-            Example 3: "I need to buy groceries later"
-            Response: "NOT_MATH"`;
+            Examples:
+            "divide by zero" -> "\\frac{1}{0}"
+            "square root of negative one" -> "\\sqrt{-1}"
+            "infinity plus infinity" -> "\\infty + \\infty"
+            "zero to the power of zero" -> "0^0"
+            "matrix with impossible dimensions" -> "\\begin{pmatrix} a & b \\\\ c & d & e \\end{pmatrix}"
+            "log of zero" -> "\\log(0)"
+            "undefined integral" -> "\\int e^{x^2} dx"
+            "I need coffee" -> "NOT_MATH"`;
 
             const result = await model.generateContent([
                 systemInstructions,
@@ -261,20 +269,41 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
+    const setApiKeyCommand = vscode.commands.registerCommand('abd-dev.setApiKey', async () => {
+        const newApiKey = await vscode.window.showInputBox({
+            prompt: 'Enter your Gemini API Key',
+            password: true,
+            placeHolder: 'Enter API key from Google AI Studio'
+        });
+
+        if (newApiKey) {
+            await config.update('geminiApiKey', newApiKey, true);
+            apiKey = newApiKey;
+            genAI = new GoogleGenerativeAI(apiKey);
+            model = genAI.getGenerativeModel({ model: modelName });
+            vscode.window.showInformationMessage('Gemini API key has been updated');
+        }
+    });
+
     const configListener = vscode.workspace.onDidChangeConfiguration(event => {
-        if (event.affectsConfiguration('ai-latex-helper')) {
-            const newConfig = vscode.workspace.getConfiguration('ai-latex-helper');
+        if (event.affectsConfiguration('abd-dev')) {
+            const newConfig = vscode.workspace.getConfiguration('abd-dev');
 
-            const newApiKey = newConfig.get<string>('apiKey') || '';
-            if (newApiKey !== apiKey) {
+            const newApiKey = newConfig.get<string>('geminiApiKey') || '';
+            const newModelName = newConfig.get<string>('geminiModel') || 'gemini-2.0-flash-001';
+            
+            if (newApiKey !== apiKey || newModelName !== modelName) {
                 apiKey = newApiKey;
+                modelName = newModelName;
                 genAI = new GoogleGenerativeAI(apiKey);
-                model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+                model = genAI.getGenerativeModel({ model: modelName });
             }
+        }
 
-            debounceDelay = newConfig.get<number>('debounceDelay') || 1000;
-
-            const newIsEnabled = newConfig.get<boolean>('enabled') ?? true;
+        if (event.affectsConfiguration('ai-latex-helper')) {
+            const helperConfig = vscode.workspace.getConfiguration('ai-latex-helper');
+            debounceDelay = helperConfig.get<number>('debounceDelay') || 1000;
+            const newIsEnabled = helperConfig.get<boolean>('enabled') ?? true;
             if (newIsEnabled !== isEnabled) {
                 isEnabled = newIsEnabled;
                 updateStatusBarText();
@@ -285,6 +314,7 @@ export function activate(context: vscode.ExtensionContext) {
     const changeListener = vscode.workspace.onDidChangeTextDocument(onTextDocumentChange);
 
     context.subscriptions.push(
+        setApiKeyCommand,
         convertCommand,
         toggleCommand,
         completionProvider,
